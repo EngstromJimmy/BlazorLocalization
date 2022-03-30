@@ -1,0 +1,50 @@
+﻿@*<2.1 Add a new component>*@
+@using System.Globalization
+@using Microsoft.Extensions.Options
+@inject NavigationManager Nav
+@inject IOptions<RequestLocalizationOptions> RequestLocalizationOptions
+<p>
+    <label>
+        Select your locale:
+        <select @bind="Culture">
+            @foreach (var culture in supportedCultures)
+            {
+                <option value="@culture">@culture.DisplayName</option>
+            }
+        </select>
+    </label>
+</p>
+
+@code
+{
+    private CultureInfo[] supportedCultures = new CultureInfo[0];
+
+    protected override void OnInitialized()
+    {
+        if (RequestLocalizationOptions != null && RequestLocalizationOptions.Value.SupportedCultures!=null)
+        {
+            supportedCultures = RequestLocalizationOptions.Value.SupportedCultures.ToArray();
+        }
+        Culture = CultureInfo.CurrentCulture;
+    }
+
+    private CultureInfo Culture
+    {
+        get => CultureInfo.CurrentCulture;
+        set
+        {
+            if (CultureInfo.CurrentCulture != value)
+            {
+                var uri = new Uri(Nav.Uri)
+                    .GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+                var cultureEscaped = Uri.EscapeDataString(value.Name);
+                var uriEscaped = Uri.EscapeDataString(uri);
+
+                Nav.NavigateTo(
+                    $"Culture/Set?culture={cultureEscaped}&redirectUri={uriEscaped}",
+                    forceLoad: true);
+            }
+        }
+    }
+}
+@*</2.1 Add a new component>*@

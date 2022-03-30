@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32314.265
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAssembly", "WebAssembly\WebAssembly.csproj", "{4315E571-D25F-4D46-8ED7-2F12ADD947D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BA5D9A65-01BD-4101-B00F-3EF6920FFA94}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.md = ReadMe.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorServer", "BlazorServer\BlazorServer.csproj", "{F0A7C861-9849-4C3C-BDDF-7B3B03ABF8B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4315E571-D25F-4D46-8ED7-2F12ADD947D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4315E571-D25F-4D46-8ED7-2F12ADD947D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4315E571-D25F-4D46-8ED7-2F12ADD947D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4315E571-D25F-4D46-8ED7-2F12ADD947D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0A7C861-9849-4C3C-BDDF-7B3B03ABF8B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0A7C861-9849-4C3C-BDDF-7B3B03ABF8B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0A7C861-9849-4C3C-BDDF-7B3B03ABF8B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0A7C861-9849-4C3C-BDDF-7B3B03ABF8B6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BA1324A2-C56F-4AD3-9849-41B21D88FC37}
+	EndGlobalSection
+EndGlobal
