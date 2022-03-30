@@ -27,6 +27,17 @@
         <a class="dismiss">🗙</a>
     </div>
 
-    <script src="_framework/blazor.server.js"></script>
+    <script src="_framework/blazor.server.js"  autostart="false"></script>
+    <script>
+      Blazor.start().then(function () {
+        const value = ('; '+document.cookie).split(`; .AspNetCore.Culture=`).pop().split(';')[0];
+        if(value.length>0)
+        {
+            var unescapedvalue=unescape(value);
+            var matches=unescapedvalue.match(/c=(?<c>.+?)\|uic=(?<uic>.*)/).groups;
+            sessionStorage.setItem("Toolbelt.Blazor.I18nText.CurrentLanguage",matches.uic);
+        }
+      });
+    </script>
 </body>
 </html>

@@ -11,24 +11,25 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+//<Add Toolbelt>
+builder.Services.AddI18nText();
+//</Add Toolbelt>
+
 //<1.1 Add Localization>
+var supportedCultures = new[]
+{
+                new CultureInfo("en"),
+                new CultureInfo("sv")
+};
 builder.Services.AddLocalization();
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
-    var supportedCultures = new[]
-    {
-                new CultureInfo("en"),
-                new CultureInfo("sv")
-    };
     options.DefaultRequestCulture = new RequestCulture(supportedCultures[0]);
     options.SupportedCultures = supportedCultures;
     options.SupportedUICultures = supportedCultures;
 });
 //</1.1 Add Localization>
 
-//<Add Toolbelt>
-builder.Services.AddI18nText();
-//</Add Toolbelt>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -57,7 +58,7 @@ app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
 //<1.3 Add Minimal API>
-app.MapGet("Culture/Set", (HttpRequest request, [FromQuery] string culture, [FromQuery] string redirectUri) =>
+app.MapGet("Culture/Set", async (HttpRequest request, [FromQuery] string culture, [FromQuery] string redirectUri) =>
 {
     if (culture != null)
     {
