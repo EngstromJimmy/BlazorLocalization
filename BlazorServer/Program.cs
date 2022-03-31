@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Globalization;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
+using Toolbelt.Blazor.I18nText;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
-//<Add Toolbelt>
-builder.Services.AddI18nText();
-//</Add Toolbelt>
+//<4.1 Add Toolbelt>
+builder.Services.AddI18nText(options =>
+{
+    options.PersistanceLevel = PersistanceLevel.None;
+    options.GetInitialLanguageAsync = (_, _) => ValueTask.FromResult(CultureInfo.CurrentUICulture.Name);
+});
+//</4.1 Add Toolbelt>
 
 //<1.1 Add Localization>
 var supportedCultures = new[]
@@ -21,13 +26,13 @@ var supportedCultures = new[]
                 new CultureInfo("en"),
                 new CultureInfo("sv")
 };
-builder.Services.AddLocalization();
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     options.DefaultRequestCulture = new RequestCulture(supportedCultures[0]);
     options.SupportedCultures = supportedCultures;
     options.SupportedUICultures = supportedCultures;
 });
+builder.Services.AddLocalization();
 //</1.1 Add Localization>
 
 var app = builder.Build();
